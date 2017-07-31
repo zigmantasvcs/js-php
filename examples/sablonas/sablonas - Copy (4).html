@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form action="insert.php">
+			<fieldset>
+				<legend>Prisijungimo forma</legend>
+				Vardas: <input type="text" required placeholder="Áveskite kà nors" /> <br/><br/>
+				Slaptaþodis: <input type="password" required />
+			</fieldset>
+
+			<br/><br/>
+			Tekstas: <textarea> </textarea>
+			<br />
+			Pasirinkite: <br />
+			<input type="checkbox" name="vardas1"> I have a bike
+			<input type="checkbox" name="vardas2" checked> I have a car<br>
+			<input type="checkbox" name="vardas3"> I have a boat<br>
+			
+			<br />
+			<select>
+				<option value="tuscias" selected>...</option>
+				<option value="volvo">Volvo</option>
+				<option value="saab" >Saab</option>
+				<option value="mercedes">Mercedes</option>
+				<option value="audi">Audi</option>
+			</select>
+			<br />
+			Radio button: <br />
+			<input type="radio" name="gender" value="male"> Male<br />
+			<input type="radio" name="gender" value="female"> Female<br />
+			<input type="radio" name="gender" value="other"> Other
+			<br />
+			<input type="submit" />
+		</form>
+	</body>
+</html>

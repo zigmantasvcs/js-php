@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		
+		<style>
+			.forma{
+				display:inline-block;
+				height:	300px;
+				width:300px;
+				background-color:blue;
+				float:left;
+			}
+			.debeselis{
+				display:inline-block;
+				position:relative;
+				left:50px;
+				width:300px;
+				height:	300px;
+				border:4px solid black;
+				border-top-left-radius:20px;
+				border-top-right-radius:100px;
+				border-bottom-right-radius:50px;
+				border-bottom-left-radius:50px;
+				background-color:blue;
+				float:left;
+			}
+			.visastrikampis{
+				position:relative;
+				left:-80px;
+				top:150px;
+			}
+			.juodastrikampis{
+				position:relative;
+				display:inline-block;
+				border-width:40px;
+				border-style:solid;
+				border-top-color:transparent;
+				border-bottom-color:transparent;
+				border-left-color:transparent;
+				border-right-color:black;
+				width:0px;
+			}
+			.baltastrikampis{
+				position:relative;
+				left:-78px;
+				display:inline-block;
+				border-width:40px;
+				border-style:solid;
+				border-top-color:transparent;
+				border-bottom-color:transparent;
+				border-left-color:transparent;
+				border-right-color:blue;
+				width:0px;
+			}
+			.input{
+				position:relative;
+				margin:5px;
+				margin-bottom:30px;
+				height:40px;
+				width:280px;
+				top:50px;
+				font-size:20pt;
+				border-style:hidden;
+				border-radius:5px;
+			}
+			#error{
+				position:relative;
+				top:50px;
+				left:30pt;
+				font-size:20pt;
+				opacity:0;			}
+		</style>
+	</head> 	
+	<body>
+		<div class="forma">
+			<form id="login" action="login.php">
+				<div><input class="input" id="name" type="text" /></div>
+				<div><input class="input" id="password" type="password" /></div>
+				<div><input class="input" type="submit" value="jungtis" /></div>
+			</form>
+		</div>
+		<div class="debeselis">
+			<div class="visastrikampis">
+				<div class="juodastrikampis"></div>
+				<div class="baltastrikampis"></div>
+				
+			</div>
+			<span id="error">Laukas privalomas!</span>
+		</div>
+		
+		<script src="js/jquery-3.2.1.js"></script>
+		<script>
+			$("input[type=submit]").on('click', function(event){
+				
+				$("#name").toggleClass(".input");
+				console.log($("#name").position().top);
+				if($("#name").val() == ""){
+					event.preventDefault();
+					$('.visastrikampis').animate({"top":$("#name").position().top -20}, 400);
+					$('.debeselis').css("background-color", "red");
+					$('.baltastrikampis').css("border-right-color", "red");
+					$('#error').animate({"opacity":1});
+					$('#name').css("background-color", "red");
+					return;
+				}
+				
+				if($("#password").val() == ""){
+					event.preventDefault();
+					$('.visastrikampis').animate({"top":$("#password").position().top -20}, 400);
+					$('.debeselis').css("background-color", "red");
+					$('.baltastrikampis').css("border-right-color", "red");
+					$('#error').animate({"opacity":1});
+					$('#password').css("background-color", "red");
+					return;
+				}
+				//$("#login").submit();
+				
+			});
+
+		
+			<!-- var currentMousePos = { x: -1, y: -1 }; -->
+			<!-- $(document).mousemove(function(event) { -->
+				<!-- currentMousePos.x = event.pageX; -->
+				<!-- currentMousePos.y = event.pageY; -->
+				<!-- console.log(event.pageY); -->
+				<!-- if(currentMousePos.y > 10 && currentMousePos.y < 180){ -->
+					<!-- $('.visastrikampis').css("top", currentMousePos.y); -->
+				<!-- } -->
+			<!-- }); -->
+		</script>
+	</body>
+</html>

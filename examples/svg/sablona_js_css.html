@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src=""></script>
+		<style>
+			#container{
+				
+			}
+			svg{
+				background-image: url("images/countries.png");
+				background-repeat: no-repeat;
+				position:relative;
+				border: 1px solid black;
+				width:100%;
+				height:100%;
+			}
+			textarea{
+				width:500px;
+				height:300px;
+			}
+			
+			img{
+				display:none;
+			}
+			
+			path{
+				fill-opacity: 0;
+			}
+			
+			
+			
+		</style>
+		<script>
+			$(document).ready(function(){
+				var lines = "";
+				var counter = 1;
+				var html = "";
+				var path = "M";
+				var first = true;
+				$("*").on("click", function(event){
+					var target = $(event.target);
+					
+					if(target.is("#draw")){
+						var x = event.clientX;
+						var y = event.clientY;
+						
+						var pos = $("#draw").position();
+						//alert(pos.left);
+						var drawX = x - pos.left;
+						var drawY = y - pos.top;
+						
+						if(first){
+							path = "M" + drawX + " " + drawY + " ";
+							first = false;
+						}
+						else{
+							path = path + "L" + drawX + " " + drawY + " ";
+						}
+						
+						var r = $("#r").val();
+						if(!r){
+							r = 1;
+						}
+						
+						html = html + "<circle cx='"+drawX+"' cy='"+drawY+"' r='"+r+"' stroke=\"green\" stroke-width=\"1\" fill=\"yellow\" /> <br />";
+						$("#draw").html(html);
+						//$("#path").val(path);
+					}
+				});
+
+				
+				$("#drawItNow").click(function(){
+					$("#path").val("");
+					path = path + "Z";
+					
+					if($("#path").val() == ""){
+						lines = lines + "<path id='map"+counter +"' d='" + path + "' />"
+						$("#path").val(lines);
+					}
+					
+					
+					
+					$("#draw").html($("#path").val());
+					
+					for(var i = 1; i<=counter;i++){
+						$("#map"+i).mouseover(function(){
+							$(this).css("fill-opacity", "0.5");
+						});
+						$("#map"+i).mouseout(function(){
+							$(this).css("fill-opacity", "0");
+						});
+					}
+					
+					counter++;
+					first = true;
+				});
+				
+				var w = $('img').width();
+				var h = $('img').height();
+				if(w < 1000){
+					$('svg').width(w);
+					$('svg').height(h);
+				}
+			});
+		</script>
+	</head>
+	
+	<body>
+		<header>
+			Virsus
+		</header>
+		<nav>
+			<label for="r">Taðko spindulys</label>
+			<input id="r" type="text" />
+			<button id="drawItNow">Draw lines</button>
+		</nav>
+		<section>
+			<img src="images/countries.png" />
+			<section id="container">
+				<svg id="draw">
+				</svg>
+			</section>
+			<section>
+				<textarea id="path">
+				</textarea>
+			</section>
+			
+		</section>
+		<footer></footer>
+		
+		<div id="container">
+
+		</div>
+
+	</body>
+</html>

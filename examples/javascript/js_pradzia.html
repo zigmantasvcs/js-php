@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<div id="auto"></div>
+		<script>
+			var car = {
+				year: 2000,
+				model: 'Ford',
+				color: 'red',
+				getInfo: function(){
+					return '<b>Vehicle</b> ' + this.year + ' ' + this.model + ' ' + this.color;
+				}
+			};
+			document.getElementById('auto').innerHTML = car.getInfo();
+			console.log(car.getInfo());
+			
+		</script>
+	</body>
+</html>
