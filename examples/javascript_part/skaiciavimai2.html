@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input id="ivestis" />
+    <button id="vienas" onclick="ivesti()">1</button>
+    <button id="du" onclick="ivesti()">2</button>
+    <button id="sudeti" onclick="sudeti()">+</button>
+    <button id="skaiciuoti" onclick="apskaiciuoti()">=</button>
+    <script>
+      function sudeti(){
+        argumentas1 = Number(document.getElementById("ivestis").value);
+        document.getElementById("ivestis").value = "";
+      }
+
+      function apskaiciuoti(){
+        document.getElementById("ivestis").value =
+          Number(document.getElementById("ivestis").value) + argumentas1;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input id="x" placeholder="x" />
+    <input id="y" placeholder="y" />
+    <input id="suma" placeholder="suma" />
+    <button id="submit" onclick="sudetis();">OK</button>
+    <script>
+      function sudetis(){
+          // string tipo reikšmei paversti į skaičių naudojamas Number()
+          if(!isNaN(document.getElementById("x").value) && !isNaN(document.getElementById("y").value)){
+            document.getElementById("suma").value = Number(document.getElementById("x").value) + Number(document.getElementById("y").value);
+          }
+          else{
+            console.log("ne skaicius");
+          }
+      }
+    </script>
+  </body>
+</html>

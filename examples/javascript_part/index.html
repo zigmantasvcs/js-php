@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        var color = "blue";
+        var rect = "";
+        for(var eilute = 0; eilute<8;eilute++){
+          for(var stulpelis = 0; stulpelis< 8;stulpelis++){
+            rect += "<rect x="+stulpelis*20+" y="+eilute*20+" width=20 height=20 style='fill:"+color+";'/>";
+            //clearRect.attr({"x":i*20, "y":0, "width":20, "height":20, "style":"fill:blue;"});
+            //clearRect.css({"fill":"blue"});
+            if(stulpelis != 7){
+              if(color == "blue"){
+                color = "silver";
+              }
+              else{
+                color = "blue";
+              }
+            }
+          }
+        }
+        $("#board").html(rect);
+
+        $("#add").on("click", function(){
+          var li = $("<li></li>");
+          li.html($("#tekstas").val());
+          $("#list").append(li);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <svg width="500" height="500" id="board">
+    </svg>
+    <input type="text" id="tekstas" />
+    <button id="add" value="pridek"></button>
+    <ul id="list">
+
+    </ul>
+
+
+
+  </body>
+</html>
