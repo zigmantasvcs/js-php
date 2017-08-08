@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+  </head>
+  <body onresize="alert('keiciasi');">
+    <script>
+      var studentai = [{
+        name:"Jonas",
+        surname:"Jonaitis",
+        age:18,
+        getStudent: function(){
+          return "VU mokosi studentas " +
+            this.name + " " + this.surname +
+            ", kurio amžius yra " + this.age;
+        }
+      },
+      {
+        name:"Petras",
+        surname:"Petraitis",
+        age:22,
+        getStudent: function(){
+          return "VU mokosi studentas " +
+            this.name + " " + this.surname +
+            ", kurio amžius yra " + this.age;
+        }
+      }];
+
+      for(var counter=0;counter<studentai.length;counter++){
+        console.log(studentai[counter].getStudent());
+      }
+
+
+      // var auto1 = ["Volkswagen", "BMW", "Volvo"]; // tuscias masyvas
+      // var auto2 = ["Ford", "Tesla"];
+      //
+      // var auto = auto1.concat(auto2);
+      //
+      // auto = auto.slice(1,3);
+      //
+      // auto.sort();
+      //
+      // for(var counter=0;counter<auto.length;counter++){
+      //   console.log(auto[counter]);
+      // }
+
+
+      // for(var counter=0;counter<=2;counter++){
+      //   if(auto[counter]=="BMW"){
+      //     auto[counter] = "Toyota";
+      //   }
+      //   console.log(auto[counter]);
+      // }
+
+      // ivesti();
+      // try{
+      //   ivesti();
+      //
+      // }
+      // catch(ex){
+      //   console.log("Atsiprašome įvyko klaida! " + ex.message);
+      // }
+      // finally{
+      //
+      // }
+
+
+      // for(var counter=0;counter < 10;counter++){
+      //   alert("Cha"+counter);
+      // }
+
+
+
+
+
+      // var slaptazodisTikras = "qwerty123";
+      // do{
+      //     var slaptazodis = prompt("Koks slaptazodis?", "");
+      // }while(slaptazodis != slaptazodisTikras)
+      //
+      // alert("Jūs prisijungėte!");
+
+      // var x = 0;
+      // while(true){
+      //   alert("Cha");
+      //   if(x == 10){
+      //     break;
+      //   }
+      //   x++;
+      // }
+      // console.log(x);
+    </script>
+  </body>
+</html>

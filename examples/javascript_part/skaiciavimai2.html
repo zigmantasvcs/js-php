@@ -6,20 +6,69 @@
   </head>
   <body>
     <input id="ivestis" />
-    <button id="vienas" onclick="ivesti()">1</button>
-    <button id="du" onclick="ivesti()">2</button>
+    <button id="vienas" onclick="ivesti(this)">1</button>
+    <button id="du" onclick="ivesti(this)">2</button>
+
     <button id="sudeti" onclick="sudeti()">+</button>
+    <button id="atimti" onclick="atimti()">-</button>
+    <button id="atimti" onclick="dauginti()">*</button>
     <button id="skaiciuoti" onclick="apskaiciuoti()">=</button>
     <script>
-      function sudeti(){
+
+      function ivesti(elementas){
+        document.getElementById("ivestis").value += elementas.innerText;
+      }
+
+      function dauginti(){
+        veiksmas = "*";
         argumentas1 = Number(document.getElementById("ivestis").value);
         document.getElementById("ivestis").value = "";
       }
 
-      function apskaiciuoti(){
-        document.getElementById("ivestis").value =
-          Number(document.getElementById("ivestis").value) + argumentas1;
+      function atimti(){
+        veiksmas = "-";
+        argumentas1 = Number(document.getElementById("ivestis").value);
+        document.getElementById("ivestis").value = "";
       }
+
+
+  		function sudeti(){
+        veiksmas = "+";
+  			argumentas1 = Number(document.getElementById("ivestis").value);
+  			document.getElementById("ivestis").value = "";
+  		}
+
+  		function apskaiciuoti(){
+
+        switch (veiksmas) {
+
+          case "+":
+            document.getElementById("ivestis").value =
+              Number(document.getElementById("ivestis").value) + argumentas1;
+            break;
+
+          case "-":
+            document.getElementById("ivestis").value =
+              Number(document.getElementById("ivestis").value) - argumentas1;
+            break;
+
+
+          default:
+
+        }
+
+        // if(veiksmas == "+"){
+        //   document.getElementById("ivestis").value =
+        //     Number(document.getElementById("ivestis").value) + argumentas1;
+        // }else if(veiksmas == "-"){
+        //   document.getElementById("ivestis").value =
+        //     Number(document.getElementById("ivestis").value) - argumentas1;
+        // }else if(veiksmas == "*"){
+        //   document.getElementById("ivestis").value =
+        //     Number(document.getElementById("ivestis").value) * argumentas1;
+        // }
+
+  		}
     </script>
   </body>
 </html>
