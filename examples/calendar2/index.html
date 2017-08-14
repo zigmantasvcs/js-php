@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script>
+      function GetFirstMonthDayWeekDay(){
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var firstMonthDay = new Date(y, m, 1);
+
+        var firstMonthDayWeekDay = firstMonthDay.getDay();
+
+        if(firstMonthDayWeekDay == 0){
+          firstMonthDayWeekDay = 7;
+        }
+
+        return firstMonthDayWeekDay;
+      }
+
+      function GetLastDay(){
+        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+        var lastDay = new Date(y, m+1, 0);
+
+        return lastDay.getDate();
+      }
+
+      function GetMonth(){
+        var months = ["Sausis", "Vasaris", "Kovas", "Balandis", "Gegužė", "Birželis", "Liepa", "Rugpjūtis", "Rugsėjis", "Spalis", "Lapkritis", "Gruodis"];
+        var date = new Date();
+        return months[date.getMonth()];
+      }
+
+      $(function(){
+        var daysInCurrentMonth = GetLastDay();
+        var currentDay = 1;
+        var currentWeek = 1;
+        var firstWeekDay = GetFirstMonthDayWeekDay();
+        var printDays = false;
+
+        $("#month").text(GetMonth());
+
+        while(true){
+
+          var week = $("<div></div>");
+          week.attr({id:"week"+currentWeek});
+          week.attr({class:"week"});
+          $("#calendar").append(week);
+
+          for(var i = 1; i<=7;i++){
+            if(firstWeekDay == i || printDays){
+              printDays = true;
+            }
+
+
+            if(currentDay > daysInCurrentMonth){
+              printDays = false;
+            }
+
+            if(printDays){
+              var day = $("<div></div>");
+              day.text(currentDay);
+              day.attr({class:"day"});
+              $("#week"+currentWeek).append(day);
+              currentDay++;
+            }else{
+              var day = $("<div></div>");
+              day.text("");
+              day.attr({class:"day"});
+              $("#week"+currentWeek).append(day);
+            }
+
+
+
+          }
+
+          currentWeek++;
+          if(currentDay >= daysInCurrentMonth){
+            break;
+          }
+        }
+
+
+
+      });
+    </script>
+    <style>
+      #calendar{
+        border:1px solid black;
+        width: 100%;
+        height: auto;
+      }
+      .day{
+        width: 200px;
+        height: 150px;
+        float: left;
+      }
+      .week{
+        overflow: auto;
+      }
+      .day, .weekend{
+        margin:2px;
+        border:1px solid black;
+      }
+      .weekend{
+
+      }
+    </style>
+  </head>
+  <body>
+      <h1 id="month"></h1>
+      <div id="calendar">
+      </div>
+  </body>
+</html>

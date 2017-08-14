@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      // grąžina einamojo mėnesio pirmos dienos savaitės dieną
+      function GetFirstMonthDayWeekDay(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var currentMonthFirstDay = new Date(year, month, 1);
+        return currentMonthFirstDay.getDay();
+      }
+
+      // funkcija grąžina paskutio mėnesio dieną
+      function GetLastDay(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        return new Date(year, month+1, 0).getDate();
+      }
+
+      // gražina einamąjį mėnesį lietuviškai
+      function GetMonthInLithuania(){
+          var months = [
+            "Sausis",
+            "Vasaris",
+            "Kovas",
+            "Balandis",
+            "Gegužė",
+            "Birželis",
+            "Liepa",
+            "Rugpjūtis",
+            "Rugsėjis",
+            "Spalis",
+            "Lapkritis",
+            "Gruodis"];
+
+          var date = new Date();
+          return months[date.getMonth()];
+      }
+
+      // veiksmai užkrovus puslapį
+      $(function(){
+
+        var currentDay = 1; // apsibrėžiame nuo kurios dienos spausdinsime dienas į kalendoriaus langelį
+
+        var currentWeek = 1; // apsibrėžiame savaitės counterį
+
+        var printDays = false; // kintamasis kuris pasakys ar spausdinti dieną į langelį. Nespausdinamas bus pvz. pirmadienis jei mėnuo prasideda antradieniu
+
+        var firstWeekDay = GetFirstMonthDayWeekDay(); // iš funkcijos pasiimame einamojo mėnesio pirmos dienos savaitės dieną, ji bus reikalinga norint pakeisti prindDays statusą į true, kai savaitės ciklo metu nustatyta, kad ciklo kintamasis sutampa su savaitės diena iš funkcijos
+
+        var daysInCurrentMonth = GetLastDay(); // paskutinė mėnesio diena, reikalinga kaip mėnesio dienų skaičius. Reikalingas ciklui skaičiuojančiam visas mėnesio dienas
+
+        $("#month").html(GetMonthInLithuania()); // į elementą, kurio id yra month įdedamas lietuviškas einamojo mėnesio pavadinimas, kuris gaunamas naudojant fukciją GetMonthInLithuania aprašytą aukščiau
+
+        while(true){ // ciklas skirtas mėnesio dienoms skaičiuoti, naudojame while ciklą, nes kai kuriais ciklo apsisukimo atvejais dienų neskaičiuosime, o atvaizduosime papildomus kito mėnesio langelius
+          var week = $("<div></div>"); // sukuriame savaitės elementą
+          week.attr({class:"week"}); // pridedame klasės atributą savaitės elementui
+          week.attr({id:"week"+currentWeek}); // pridedame unikalų id atributą savaitės elementui
+
+          $("#calendar").append(week); // pridedame sukurtą savaitės elementą į konteinerį
+
+          for (var i = 1; i <= 7; i++) { // ciklas skirtas savitės dienoms
+
+            if(firstWeekDay == i){ // patikriname ar pirmoji mėnesio diena (kaip savaitės diena) sutampa su ciklo kintamojo reikšme
+              printDays = true; // sukuriame leidimą spausdinti savaitė dienas, tuo atveju kai pirmoji mėnesio diena (kaip savaitės diena) sutampa su ciklo kintamuoju. Tai reiškia, pradedame spausdinti dienas langeliuose jau šio ciklo metu
+            }
+
+            if(currentDay > daysInCurrentMonth){ // patikriname ar einamoji diena (ciklo kintamasis currentDay) nėra didesnis už mėnesio dienų skaičių
+              printDays = false; // jeigu jau didesnis, nutraukiame dienų spausdinimą langeliuose
+            }
+
+            if(printDays){ // jeigu yra leidimas spausdinti dienas langeliuose
+              var day = $("<div></div>"); // sukuriame dienos elementą
+              day.attr({class:"day"}); // pridedame atributą class su day reikšme
+              day.attr({id:"day"+currentDay}); // rpidedame atributą id su reikšme day+currentDay (day1, day2 ir t.t.)
+              day.text(currentDay); // atvaizduojame einamąją dieną (ciklo kintamojo reikšmę) į dienos langelį
+              week.append(day); // pridedame dieną į savaitės elementą
+
+              currentDay++; // pereiname prie sekančios dienos
+            }else{ // tuo atveju kai leidimas spausdinti dienas neduotas
+              var day = $("<div></div>"); // vistie kuriame elementą dienai atvaizduoti
+              day.attr({class:"day"}); // pridedame klasę, šiuo atveju galime ir kitą klasės pavadinimą, jei norėtum išskirti stiliumi iš kitų dienų
+              //day.attr({id:"day"+currentDay}); // nepridėkite id, nes jei diena neatvaizduojama tikėtina kad id gali sutapti su kito elemento id, kuris dieną atvaizduoja pvz. pirmadienis yra praito mėnėsio paskutinė diena tai pridėjus id bus day1, antradienis yra einamojo mėnesio pirmoji diena tai id taip pat bus day1, o tai jau bus blogai.
+              day.text(""); // tiesiog padarome tuščia dienos elementą
+              week.append(day); // tuščia dienos elementą pridedame prie savaitės
+            }
+
+
+
+
+          }
+
+          if(currentWeek == 5){ // kai jau i6spausdintos 5 savaitės išeiname iš ciklo, gali būti ir kitas sprendimas
+            break;
+          }
+
+          currentWeek++; // padidiname savaitės kintamąjį vienetu
+        }
+
+      });
+    </script>
+    <style>
+      #calendar{
+        border:1px solid black;
+        width: 100%;
+        height: auto;
+      }
+      .week{
+        border:1px solid black;
+        height: 155px;
+      }
+      .day{
+        border:1px solid black;
+        width: 150px;
+        height: 150px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="month">
+
+    </div>
+    <div id="calendar">
+
+    </div>
+  </body>
+</html>
